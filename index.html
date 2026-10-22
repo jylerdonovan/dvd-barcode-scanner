@@ -5,7 +5,7 @@
 <div class="panel"><strong>Queued scans: <span id="count">0</span></strong><p><button id="download">Download CSV</button><button id="clear">Clear queue</button><button id="sync">Send queued scans to Google Sheets</button></p><small>Keep your scans until you confirm they arrived in the Scans tab. The CSV remains a backup. Sending does not automatically clear the queue.</small><ol id="items"></ol></div>
 <script src="https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js"></script>
 <script>
-const SHEETS_WEB_APP_URL='https://script.google.com/macros/library/d/1u9nZ4pd_eQsNM_9B1MWL7PHwPGL1Q9ImATQBdoXpVlS7rSlmcNjnB1yX/2/exec';
+const SHEETS_WEB_APP_URL='https://script.google.com/macros/s/AKfycbzZuAonJexnxo7SoW0Sk-Vh4miuqpR5ljCRbT1ZhaKyhFkOXWd_8nS_t19bLoXnUmWtQQ/exec';
 const $=id=>document.getElementById(id),key='dvd_scans_v1';let scans=[],reader=null,running=false,pending=null,locked=false;
 try{const stored=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(stored))scans=stored.filter(x=>/^\d{8,14}$/.test(String(x)));}catch(e){}
 function render(){localStorage.setItem(key,JSON.stringify(scans));$('count').textContent=scans.length;$('items').replaceChildren(...scans.slice(-12).reverse().map(x=>{const li=document.createElement('li');li.textContent=x;return li;}));}
